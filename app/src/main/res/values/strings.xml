@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Royaly Boaly</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shadow_auth">shadowAuth</string>
+    <string name="bg_image">bg_image</string>
+    <string name="image_woman">image_woman</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="if_you_want_to_save_your_score_please_sign_up">If you want to \n save your \n score please \n sign up</string>
+    <string name="phone">Phone</string>
+    <string name="enter_your_phone">Enter your phone</string>
+    <string name="rate">Rate</string>
+    <string name="plus">+</string>
+    <string name="minus">—</string>
+    <string name="play">Play</string>
+    <string name="bonus_game">Bonus Game</string>
+    <string name="please_enter_a_valid_email">Введите корректный email</string>
+    <string name="please_enter_a_valid_phone">Введите корректный phone</string>
+    <string name="game_over">Game over</string>
+    <string name="back_to_menu">Back to menu</string>
+    <string name="balance">Balance : %1$d</string>
+    <string name="win">Win : %1$d</string>
+    <string name="not_enough_money">Не хватает денег!</string>
+</resources>
