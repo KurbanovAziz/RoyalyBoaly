@@ -10,10 +10,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:id="@+id/main_auth_layout"
-        android:layout_height="match_parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content">
 
     <TextView
-        android:layout_marginTop="78dp"
         android:id="@+id/tv_sing_up"
         android:textColor="@color/white"
         android:textAlignment="center"
@@ -67,13 +70,17 @@
         android:layout_width="match_parent"
         android:id="@+id/auth_layout"
         android:visibility="invisible"
-        android:layout_height="match_parent">
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/iv_shadow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="72dp"
             android:contentDescription="@string/shadow_auth"
             android:src="@drawable/ic_shadow"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -83,9 +90,9 @@
 
         <ImageView
             android:id="@+id/iv_bg"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="140dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="200dp"
             android:background="@drawable/circle_style"
             android:contentDescription="@string/bg_image"
             app:layout_constraintBottom_toTopOf="@id/iv_shadow"
@@ -94,9 +101,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_marginBottom="42dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="50dp"
             android:contentDescription="@string/image_woman"
             android:src="@drawable/ic_woman"
             app:layout_constraintBottom_toBottomOf="@id/iv_bg"
@@ -108,15 +115,15 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:fontFamily="@font/kannadamn"
             android:text="@string/enter_your_email"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="50sp"
+            android:layout_marginTop="12dp"
+            android:textSize="44sp"
             app:layout_constraintEnd_toEndOf="@id/iv_shadow"
             app:layout_constraintStart_toStartOf="@id/iv_shadow"
-            app:layout_constraintTop_toTopOf="@id/iv_shadow" />
+            app:layout_constraintTop_toBottomOf="@id/iv_bg" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ed_input"
@@ -137,6 +144,7 @@
                 android:background="@drawable/ed_radius"
                 android:fontFamily="@font/kannadamn"
                 android:inputType="textEmailAddress"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
 

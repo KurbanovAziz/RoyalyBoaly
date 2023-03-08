@@ -1,12 +1,13 @@
 package com.royaly.boaly.ui.game.two
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.animation.AnimationUtils
 import com.royaly.boaly.R
 import com.royaly.boaly.databinding.ActivityGameTwoBinding
-import com.royaly.boaly.ui.MenuActivity
 import com.royaly.boaly.ui.MenuActivity.Companion.KEY_BALANCE
 import com.royaly.boaly.ui.MenuActivity.Companion.KEY_NEW_BALANCE
 import com.royaly.boaly.utils.showToast
@@ -98,39 +99,53 @@ class GameTwoActivity : AppCompatActivity() {
             icons[random.nextInt(icons.size)]
         )
 
-        binding.column11.setImageResource(slot1Icons[0])
-        binding.column12.setImageResource(slot1Icons[1])
-        binding.column13.setImageResource(slot1Icons[2])
-
-        binding.column21.setImageResource(slot2Icons[0])
-        binding.column22.setImageResource(slot2Icons[1])
-        binding.column23.setImageResource(slot2Icons[2])
-
-        binding.column31.setImageResource(slot3Icons[0])
-        binding.column32.setImageResource(slot3Icons[1])
-        binding.column33.setImageResource(slot3Icons[2])
-
+        val animation = AnimationUtils.loadAnimation(this, R.anim.slot_animation)
+        binding.column11.startAnimation(animation)
+        binding.column12.startAnimation(animation)
+        binding.column13.startAnimation(animation)
+        binding.column21.startAnimation(animation)
+        binding.column22.startAnimation(animation)
+        binding.column23.startAnimation(animation)
+        binding.column31.startAnimation(animation)
+        binding.column32.startAnimation(animation)
+        binding.column33.startAnimation(animation)
 
         var winMultiplier = 0.0
-        if (slot1Icons[0] == slot2Icons[0] && slot2Icons[0] == slot3Icons[0]) {
-            winMultiplier = getMultiplier(slot1Icons[0])
-        } else if (slot1Icons[1] == slot2Icons[1] && slot2Icons[1] == slot3Icons[1]) {
-            winMultiplier = getMultiplier(slot1Icons[1])
-        } else if (slot1Icons[2] == slot2Icons[2] && slot2Icons[2] == slot3Icons[2]) {
-            winMultiplier = getMultiplier(slot1Icons[2])
-        } else if (slot1Icons[0] == slot2Icons[1] && slot2Icons[1] == slot3Icons[2]) {
-            winMultiplier = getMultiplier(slot1Icons[0]) * getMultiplier(slot2Icons[1]) *
-                    getMultiplier(slot3Icons[2])
-        } else if (slot1Icons[2] == slot2Icons[1] && slot2Icons[1] == slot3Icons[0]) {
-            winMultiplier = getMultiplier(slot1Icons[2]) * getMultiplier(slot2Icons[1]) *
-                    getMultiplier(slot3Icons[0])
-        } else if (slot1Icons[0] == slot1Icons[1] && slot1Icons[1] == slot1Icons[2]) {
-            winMultiplier = getMultiplier(slot1Icons[0])
-        } else if (slot2Icons[0] == slot2Icons[1] && slot2Icons[1] == slot2Icons[2]) {
-            winMultiplier = getMultiplier(slot2Icons[0])
-        } else if (slot3Icons[0] == slot3Icons[1] && slot3Icons[1] == slot3Icons[2]) {
-            winMultiplier = getMultiplier(slot3Icons[0])
-        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            binding.column11.setImageResource(slot1Icons[0])
+            binding.column12.setImageResource(slot1Icons[1])
+            binding.column13.setImageResource(slot1Icons[2])
+
+            binding.column21.setImageResource(slot2Icons[0])
+            binding.column22.setImageResource(slot2Icons[1])
+            binding.column23.setImageResource(slot2Icons[2])
+
+            binding.column31.setImageResource(slot3Icons[0])
+            binding.column32.setImageResource(slot3Icons[1])
+            binding.column33.setImageResource(slot3Icons[2])
+
+            if (slot1Icons[0] == slot2Icons[0] && slot2Icons[0] == slot3Icons[0]) {
+                winMultiplier = getMultiplier(slot1Icons[0])
+            } else if (slot1Icons[1] == slot2Icons[1] && slot2Icons[1] == slot3Icons[1]) {
+                winMultiplier = getMultiplier(slot1Icons[1])
+            } else if (slot1Icons[2] == slot2Icons[2] && slot2Icons[2] == slot3Icons[2]) {
+                winMultiplier = getMultiplier(slot1Icons[2])
+            } else if (slot1Icons[0] == slot2Icons[1] && slot2Icons[1] == slot3Icons[2]) {
+                winMultiplier = getMultiplier(slot1Icons[0]) * getMultiplier(slot2Icons[1]) *
+                        getMultiplier(slot3Icons[2])
+            } else if (slot1Icons[2] == slot2Icons[1] && slot2Icons[1] == slot3Icons[0]) {
+                winMultiplier = getMultiplier(slot1Icons[2]) * getMultiplier(slot2Icons[1]) *
+                        getMultiplier(slot3Icons[0])
+            } else if (slot1Icons[0] == slot1Icons[1] && slot1Icons[1] == slot1Icons[2]) {
+                winMultiplier = getMultiplier(slot1Icons[0])
+            } else if (slot2Icons[0] == slot2Icons[1] && slot2Icons[1] == slot2Icons[2]) {
+                winMultiplier = getMultiplier(slot2Icons[0])
+            } else if (slot3Icons[0] == slot3Icons[1] && slot3Icons[1] == slot3Icons[2]) {
+                winMultiplier = getMultiplier(slot3Icons[0])
+            }
+        },500)
 
         val payout = if (winMultiplier > 0.0) bet * winMultiplier else -bet
 
