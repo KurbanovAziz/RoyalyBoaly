@@ -13,6 +13,7 @@ import com.royaly.boaly.ui.menu.MenuActivity.Companion.KEY_BALANCE
 import com.royaly.boaly.utils.showToast
 import java.util.*
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 
 class GameOneActivity : AppCompatActivity() {
 
@@ -29,12 +30,21 @@ class GameOneActivity : AppCompatActivity() {
 
         update()
         initListener()
+        onBack()
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        setResult(RESULT_OK, Intent().putExtra(MenuActivity.KEY_NEW_BALANCE, balance))
-        finish()
+    private fun onBack() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                setResult(
+                    RESULT_OK, Intent().putExtra(
+                        MenuActivity.KEY_NEW_BALANCE, balance
+                    )
+                )
+                finish()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun initListener() {
@@ -96,7 +106,7 @@ class GameOneActivity : AppCompatActivity() {
         }
 
         view.tag = 0
-        view.setImageResource(icons[0])
+        view.setImageResource(icons.random())
 
         animator.start()
 

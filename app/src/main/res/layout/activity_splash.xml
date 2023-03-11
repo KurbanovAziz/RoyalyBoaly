@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
+    android:background="@drawable/bg_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -36,23 +37,27 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ic_loading_woman"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:background="@drawable/gradiet_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
         <ProgressBar
             android:id="@+id/progress_bar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
+            style="@style/Widget.Material3.CircularProgressIndicator.Medium"
+            android:layout_width="50sp"
             android:layout_height="50dp"
-            android:layout_marginStart="120dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="120dp"
             android:layout_marginBottom="15dp"
             android:indeterminate="true"
-            android:indeterminateTint="@color/purple_500"
+            android:indeterminateTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

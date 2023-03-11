@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import com.royaly.boaly.R
 import com.royaly.boaly.databinding.ActivityGameTwoBinding
 import com.royaly.boaly.ui.menu.MenuActivity.Companion.KEY_BALANCE
@@ -29,13 +31,23 @@ class GameTwoActivity : AppCompatActivity() {
         balance = intent.getDoubleExtra(KEY_BALANCE, 0.0)
         update()
         initListener()
+        onBack()
 
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        setResult(RESULT_OK, Intent().putExtra(KEY_NEW_BALANCE, balance))
-        finish()
+
+    private fun onBack() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                setResult(
+                    RESULT_OK, Intent().putExtra(
+                        KEY_NEW_BALANCE, balance
+                    )
+                )
+                finish()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
 
@@ -60,6 +72,10 @@ class GameTwoActivity : AppCompatActivity() {
                 bet += 10
             }
             update()
+        }
+        binding.btnBetPlus.setOnLongClickListener {
+            bet = balance
+            return@setOnLongClickListener false
         }
         binding.btnBetMinus.setOnLongClickListener {
             if (bet != 10.0) {
@@ -95,7 +111,7 @@ class GameTwoActivity : AppCompatActivity() {
         }
 
         view.tag = 0
-        view.setImageResource(icons[0])
+        view.setImageResource(icons.random())
 
         animator.start()
 
@@ -114,7 +130,7 @@ class GameTwoActivity : AppCompatActivity() {
             timer.cancel()
             view.clearAnimation()
             view.translationY = 0f
-        }, 2000L)
+        }, 2040L)
 
     }
 
@@ -139,12 +155,12 @@ class GameTwoActivity : AppCompatActivity() {
         animateSpinner(binding.column11, icons, 200L)
         animateSpinner(binding.column12, icons, 200L)
         animateSpinner(binding.column13, icons, 200L)
-        animateSpinner(binding.column21, icons, 500L)
-        animateSpinner(binding.column22, icons, 500L)
-        animateSpinner(binding.column23, icons, 500L)
-        animateSpinner(binding.column31, icons, 800L)
-        animateSpinner(binding.column32, icons, 800L)
-        animateSpinner(binding.column33, icons, 800L)
+        animateSpinner(binding.column21, icons, 300L)
+        animateSpinner(binding.column22, icons, 300L)
+        animateSpinner(binding.column23, icons, 300L)
+        animateSpinner(binding.column31, icons, 400L)
+        animateSpinner(binding.column32, icons, 400L)
+        animateSpinner(binding.column33, icons, 400L)
 
         Handler(Looper.getMainLooper()).postDelayed({
             binding.btnPlay.isEnabled = true
@@ -198,10 +214,9 @@ class GameTwoActivity : AppCompatActivity() {
             win = payout
             update()
 
-        }, 2000L)
+        }, 2040L)
 
     }
-
 
 
     private fun getMultiplier(iconResId: Int): Double {

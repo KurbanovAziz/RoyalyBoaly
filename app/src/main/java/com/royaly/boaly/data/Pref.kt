@@ -19,7 +19,7 @@ class Pref(context: Context) {
     }
 
     fun getBalance(): Int {
-        return pref.getInt(BALANCE_KEY, 0)
+        return pref.getInt(BALANCE_KEY, 500)
     }
 
     companion object {
