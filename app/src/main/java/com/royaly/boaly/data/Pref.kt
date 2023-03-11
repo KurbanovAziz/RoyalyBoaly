@@ -2,23 +2,24 @@ package com.royaly.boaly.data
 
 import android.content.Context
 
-class Pref(context: Context) : java.io.Serializable {
+class Pref(context: Context) {
 
-    private val  pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    private val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-    fun setAuthSeen(isSeen:Boolean){
+    fun setAuthSeen(isSeen: Boolean) {
         pref.edit().putBoolean(IS_AUTH, isSeen).apply()
     }
 
-    fun isAuthSeen():Boolean{
-        return pref.getBoolean(IS_AUTH,false)
+    fun isAuthSeen(): Boolean {
+        return pref.getBoolean(IS_AUTH, false)
     }
 
-    fun saveBalance(balance : Int){
-        pref.edit().putInt(BALANCE_KEY,balance).apply()
+    fun saveBalance(balance: Int) {
+        pref.edit().putInt(BALANCE_KEY, balance).apply()
     }
+
     fun getBalance(): Int {
-        return pref.getInt(BALANCE_KEY,0)
+        return pref.getInt(BALANCE_KEY, 0)
     }
 
     companion object {
