@@ -9,12 +9,9 @@
 
     <TextView
         android:id="@+id/tv_bonus_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:fontFamily="@font/kannadamn"
+        style="@style/Text"
         android:text="@string/bonus_game"
-        android:textColor="@color/white"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,26 +38,20 @@
         app:layout_constraintTop_toTopOf="@id/iv_bg_score" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="42dp"
-        android:fontFamily="@font/kannadamn"
         android:paddingTop="12dp"
-        android:text="Score"
-        android:textColor="@color/white"
+        style="@style/Text"
+        android:text="@string/score"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_bg_score"
         app:layout_constraintStart_toStartOf="@id/iv_bg_score"
         app:layout_constraintTop_toTopOf="@id/iv_bg_score" />
 
     <TextView
+        style="@style/Text"
         android:id="@+id/tv_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/kannadamn"
         android:paddingTop="12dp"
-        android:text="500"
-        android:textColor="@color/white"
+        android:text="@string/_500"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_score_number"
         app:layout_constraintEnd_toEndOf="@id/iv_score_number"
@@ -124,15 +115,13 @@
     <Button
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/btn_back_to_home"
-        android:fontFamily="@font/kannadamn"
         android:paddingTop="16dp"
         android:text="@string/back_to_menu"
+        style="@style/Text"
         android:textAllCaps="false"
-        android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

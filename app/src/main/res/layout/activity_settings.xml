@@ -9,14 +9,11 @@
 
     <TextView
         android:id="@+id/tv_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:fontFamily="@font/kannadamn"
         android:text="@string/settings"
+        style="@style/Text"
         android:textColor="@color/black"
         android:textSize="38sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,12 +32,9 @@
 
         <TextView
             android:id="@+id/tv_music"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:fontFamily="@font/kannadamn"
             android:text="@string/music"
-            android:textColor="@color/white"
+            style="@style/Text"
             android:textSize="44sp" />
 
         <ImageView
@@ -52,12 +46,9 @@
 
         <TextView
             android:id="@+id/tv_vibration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:fontFamily="@font/kannadamn"
             android:text="@string/vibration"
-            android:textColor="@color/white"
+            style="@style/Text"
             android:textSize="44sp" />
 
         <ImageView

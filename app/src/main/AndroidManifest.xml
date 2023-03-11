@@ -13,6 +13,20 @@
         android:theme="@style/Theme.App.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.auth.email.EmailAuthActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.auth.phone.PhoneAuthActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.settings.SettingsActivity"
             android:exported="false">
             <meta-data
@@ -34,7 +48,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.MenuActivity"
+            android:name=".ui.menu.MenuActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

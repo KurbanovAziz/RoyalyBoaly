@@ -11,7 +11,7 @@
     <string name="if_you_want_to_save_your_score_please_sign_up">If you want to\nsave your\nscore please\nsign up</string>
     <string name="phone">Phone</string>
     <string name="enter_your_phone">Enter your\nphone</string>
-    <string name="rate">Rate</string>
+    <string name="rate">Rate\n%1$d</string>
     <string name="plus">+</string>
     <string name="minus">—</string>
     <string name="play">Play</string>
@@ -27,4 +27,7 @@
     <string name="music">Music</string>
     <string name="vibration">Vibration</string>
     <string name="seekbar">SeekBar</string>
+    <string name="score">Score</string>
+    <string name="_500">500</string>
+    <string name="i_want_to_be_anonymous">I want to be anonymous</string>
 </resources>
