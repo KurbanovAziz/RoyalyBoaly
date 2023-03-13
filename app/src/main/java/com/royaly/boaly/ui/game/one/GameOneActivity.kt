@@ -14,23 +14,41 @@ import com.royaly.boaly.utils.showToast
 import java.util.*
 import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.ViewModelProvider
+import com.royaly.boaly.ui.game.one.viewmodel.GameOneViewModel
 
 class GameOneActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGameOneBinding
-    private var balance = 0.0
-    private var bet = 10.0
+    private lateinit var viewModel: GameOneViewModel
+    private var animationInProgress = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameOneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        balance = intent.getDoubleExtra(KEY_BALANCE, 0.0)
-
+        viewModel = ViewModelProvider(this)[GameOneViewModel::class.java]
+        viewModel.balance = intent.getDoubleExtra(KEY_BALANCE, 0.0)
         update()
         initListener()
         onBack()
+        savedInstanceState?.let { savedState ->
+            viewModel.balance = savedState.getDouble(KEY_BALANCE, 0.0)
+            update()
+        }
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putDouble(KEY_BALANCE, viewModel.balance)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        viewModel.balance = savedInstanceState.getDouble(KEY_BALANCE, 0.0)
+        update()
     }
 
     private fun onBack() {
@@ -38,7 +56,7 @@ class GameOneActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 setResult(
                     RESULT_OK, Intent().putExtra(
-                        MenuActivity.KEY_NEW_BALANCE, balance
+                        MenuActivity.KEY_NEW_BALANCE, viewModel.balance
                     )
                 )
                 finish()
@@ -51,48 +69,53 @@ class GameOneActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             setResult(
                 RESULT_OK, Intent().putExtra(
-                    MenuActivity.KEY_NEW_BALANCE, balance
+                    MenuActivity.KEY_NEW_BALANCE, viewModel.balance
                 )
             )
             finish()
         }
 
         binding.btnPlay.setOnClickListener {
-            if (balance > 0 && bet <= balance) {
+            if (animationInProgress) {
+                showToast(getString(R.string.wait_for_completion))
+            } else if (viewModel.balance > 0 && viewModel.bet <= viewModel.balance) {
                 spinSlots()
             } else {
                 showToast(getString(R.string.not_enough_money))
             }
         }
-
-
         binding.btnBetPlus.setOnClickListener {
-            if (bet < balance) {
-                bet += 10
+            if (viewModel.bet < viewModel.balance) {
+                viewModel.bet += 10
             }
             update()
         }
+        binding.btnBetPlus.setOnLongClickListener {
+            viewModel.bet = viewModel.balance
+            return@setOnLongClickListener false
+        }
         binding.btnBetMinus.setOnLongClickListener {
-            if (bet != 10.0) {
-                bet = 10.0
+            if (viewModel.bet != 10.0) {
+                viewModel.bet = 10.0
             }
             return@setOnLongClickListener false
         }
 
         binding.btnBetMinus.setOnClickListener {
-            if (bet != 10.0) {
-                bet -= 10
+            if (viewModel.bet != 10.0) {
+                viewModel.bet -= 10
             }
             update()
         }
     }
 
     private fun update() {
-        binding.tvBalance.text = getString(R.string.balance, balance.toInt())
-        binding.tvRate.text = getString(R.string.rate, bet.toInt())
+        binding.tvBalance.text = getString(R.string.balance, viewModel.balance.toInt())
+        binding.tvRate.text = getString(R.string.rate, viewModel.bet.toInt())
     }
 
     private fun animateSpinner(view: ImageView, icons: List<Int>, delay: Long) {
+        animationInProgress = true
         val duration = 350L
 
         val animator = ValueAnimator.ofFloat(0f, view.height.toFloat() * icons.size).apply {
@@ -121,6 +144,7 @@ class GameOneActivity : AppCompatActivity() {
         }
 
         Handler(Looper.getMainLooper()).postDelayed({
+            animationInProgress = false
             animator.cancel()
             timer.cancel()
             view.clearAnimation()
@@ -180,37 +204,46 @@ class GameOneActivity : AppCompatActivity() {
             binding.column32.setImageResource(slot3Icons[1])
             binding.column33.setImageResource(slot3Icons[2])
 
-            var winMultiplier = 0.0
-
-
-            if (slot1Icons[0] == slot2Icons[0] && slot2Icons[0] == slot3Icons[0]) {
-                winMultiplier = getMultiplier(slot1Icons[0])
-            } else if (slot1Icons[1] == slot2Icons[1] && slot2Icons[1] == slot3Icons[1]) {
-                winMultiplier = getMultiplier(slot1Icons[1])
-            } else if (slot1Icons[2] == slot2Icons[2] && slot2Icons[2] == slot3Icons[2]) {
-                winMultiplier = getMultiplier(slot1Icons[2])
-            } else if (slot1Icons[0] == slot2Icons[1] && slot2Icons[1] == slot3Icons[2]) {
-                winMultiplier =
-                    getMultiplier(slot1Icons[0]) * getMultiplier(slot2Icons[1]) *
-                            getMultiplier(slot3Icons[2])
-            } else if (slot1Icons[2] == slot2Icons[1] && slot2Icons[1] == slot3Icons[0]) {
-                winMultiplier =
-                    getMultiplier(slot1Icons[2]) * getMultiplier(slot2Icons[1]) *
-                            getMultiplier(slot3Icons[0])
-            } else if (slot1Icons[0] == slot1Icons[1] && slot1Icons[1] == slot1Icons[2]) {
-                winMultiplier = getMultiplier(slot1Icons[0])
-            } else if (slot2Icons[0] == slot2Icons[1] && slot2Icons[1] == slot2Icons[2]) {
-                winMultiplier = getMultiplier(slot2Icons[0])
-            } else if (slot3Icons[0] == slot3Icons[1] && slot3Icons[1] == slot3Icons[2]) {
-                winMultiplier = getMultiplier(slot3Icons[0])
-            }
-            val payout = if (winMultiplier > 0.0) bet * winMultiplier else -bet
-            balance += payout.toInt()
-            update()
+            checkWin(slot1Icons,slot2Icons,slot3Icons)
 
         }, 2000L)
+    }
 
 
+    private fun checkWin(slot1Icons: List<Int>, slot2Icons: List<Int>, slot3Icons: List<Int>) {
+        var winMultiplier = 0.0
+
+        if (slot1Icons[0] == slot2Icons[0] && slot2Icons[0] == slot3Icons[0]) {
+            winMultiplier = getMultiplier(slot1Icons[0])
+        }
+        if (slot1Icons[1] == slot2Icons[1] && slot2Icons[1] == slot3Icons[1]) {
+            winMultiplier = getMultiplier(slot1Icons[1])
+        }
+        if (slot1Icons[2] == slot2Icons[2] && slot2Icons[2] == slot3Icons[2]) {
+            winMultiplier = getMultiplier(slot1Icons[2])
+        }
+        if (slot1Icons[0] == slot2Icons[1] && slot2Icons[1] == slot3Icons[2]) {
+            winMultiplier =
+                getMultiplier(slot1Icons[0]) * getMultiplier(slot2Icons[1]) *
+                        getMultiplier(slot3Icons[2])
+        }
+        if (slot1Icons[2] == slot2Icons[1] && slot2Icons[1] == slot3Icons[0]) {
+            winMultiplier =
+                getMultiplier(slot1Icons[2]) * getMultiplier(slot2Icons[1]) *
+                        getMultiplier(slot3Icons[0])
+        }
+        if (slot1Icons[0] == slot1Icons[1] && slot1Icons[1] == slot1Icons[2]) {
+            winMultiplier = getMultiplier(slot1Icons[0])
+        }
+        if (slot2Icons[0] == slot2Icons[1] && slot2Icons[1] == slot2Icons[2]) {
+            winMultiplier = getMultiplier(slot2Icons[0])
+        }
+        if (slot3Icons[0] == slot3Icons[1] && slot3Icons[1] == slot3Icons[2]) {
+            winMultiplier = getMultiplier(slot3Icons[0])
+        }
+        val payout = if (winMultiplier > 0.0) viewModel.bet * winMultiplier else -viewModel.bet
+        viewModel.balance += payout.toInt()
+        update()
     }
 
     private fun getMultiplier(iconResId: Int): Double {

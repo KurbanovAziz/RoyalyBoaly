@@ -21,10 +21,18 @@ class Pref(context: Context) {
     fun getBalance(): Int {
         return pref.getInt(BALANCE_KEY, 500)
     }
+    fun saveScore(score: Int) {
+        pref.edit().putInt(SCORE_KEY, score).apply()
+    }
+
+    fun getScore(): Int {
+        return pref.getInt(SCORE_KEY, 0)
+    }
 
     companion object {
         private const val PREF_NAME = "pref"
         const val IS_AUTH = "isAuthorized"
-        private const val BALANCE_KEY = "name.pref"
+        private const val BALANCE_KEY = "balance.pref"
+        private const val SCORE_KEY = "score.pref"
     }
 }

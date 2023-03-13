@@ -5,11 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
 import com.royaly.boaly.data.Pref
 import com.royaly.boaly.databinding.ActivityMenuBinding
 import com.royaly.boaly.ui.game.one.GameOneActivity
 import com.royaly.boaly.ui.game.two.GameTwoActivity
 import com.royaly.boaly.ui.game.bonus.BonusGameActivity
+import com.royaly.boaly.ui.menu.viewmodel.MenuViewModel
 import com.royaly.boaly.ui.settings.SettingsActivity
 
 class MenuActivity : AppCompatActivity() {
@@ -54,7 +56,7 @@ class MenuActivity : AppCompatActivity() {
         }
         binding.btnBonusGame.setOnClickListener {
             val intentBonus = Intent(this@MenuActivity, BonusGameActivity::class.java)
-            result.launch(intentBonus)
+            startActivity(intentBonus)
         }
         binding.btnSettings.setOnClickListener {
             val intentSettings = Intent(this@MenuActivity, SettingsActivity::class.java)

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_game_one"
+    tools:context=".ui.game.two.GameTwoActivity">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/iv_baraban"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="100dp"
+        android:src="@drawable/ic_baraban_game2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_balance"
+        style="@style/Text"
+        android:text="@string/balance"
+        android:layout_marginStart="44dp"
+        android:paddingHorizontal="30dp"
+        android:paddingTop="4dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_baraban"
+        app:layout_constraintStart_toStartOf="@id/iv_baraban"
+        app:layout_constraintTop_toTopOf="@id/iv_baraban"
+        app:layout_constraintVertical_bias="0.155" />
+
+    <TextView
+        android:id="@+id/tv_win"
+        style="@style/Text"
+        android:paddingTop="4dp"
+        android:textSize="14sp"
+        android:text="@string/win"
+        app:layout_constraintBottom_toBottomOf="@id/iv_baraban"
+        app:layout_constraintStart_toEndOf="@id/tv_balance"
+        app:layout_constraintTop_toTopOf="@id/iv_baraban"
+        app:layout_constraintVertical_bias="0.155" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/iv_baraban"
+        app:layout_constraintEnd_toEndOf="@id/iv_baraban"
+        app:layout_constraintStart_toStartOf="@id/iv_baraban"
+        app:layout_constraintTop_toTopOf="@id/iv_baraban">
+
+        <LinearLayout
+            android:id="@+id/slot1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/column1_1"
+                style="@style/Icon.Game.Two.Land"
+                android:src="@drawable/ic_game2_1" />
+
+            <ImageView
+                android:id="@+id/column1_2"
+                style="@style/Icon.Game.Two.Land"
+                android:layout_marginVertical="10dp"
+                android:src="@drawable/ic_game2_2" />
+
+            <ImageView
+                android:id="@+id/column1_3"
+                style="@style/Icon.Game.Two.Land"
+                android:src="@drawable/ic_game2_3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/slot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/column2_1"
+                style="@style/Icon.Game.Two.Land"
+                android:src="@drawable/ic_game2_4" />
+
+            <ImageView
+                android:id="@+id/column2_2"
+                style="@style/Icon.Game.Two.Land"
+                android:layout_marginVertical="10dp"
+                android:src="@drawable/ic_game2_5" />
+
+            <ImageView
+                android:id="@+id/column2_3"
+                style="@style/Icon.Game.Two.Land"
+                android:src="@drawable/ic_game2_6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/slot3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/column3_1"
+                style="@style/Icon.Game.Two.Land"
+                android:src="@drawable/ic_game2_7" />
+
+            <ImageView
+                android:id="@+id/column3_2"
+                style="@style/Icon.Game.Two.Land"
+                android:layout_marginVertical="10dp"
+                android:src="@drawable/ic_game2_7" />
+
+            <ImageView
+                android:id="@+id/column3_3"
+                style="@style/Icon.Game.Two.Land"
+                android:src="@drawable/ic_game2_1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toEndOf="@id/iv_baraban"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/iv_bet"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_bet_game_2"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bet_center"
+            app:layout_constraintEnd_toEndOf="@id/iv_bet_center"
+            app:layout_constraintStart_toStartOf="@id/iv_bet_center"
+            app:layout_constraintTop_toTopOf="@id/iv_bet_center" />
+
+        <ImageView
+            android:layout_width="292dp"
+            android:layout_height="76dp"
+            android:background="@drawable/gradiet_bet"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bet"
+            app:layout_constraintEnd_toEndOf="@id/iv_bet"
+            app:layout_constraintStart_toStartOf="@id/iv_bet"
+            app:layout_constraintTop_toTopOf="@id/iv_bet" />
+
+
+        <ImageView
+            android:id="@+id/iv_bet_center"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginEnd="110dp"
+            android:src="@drawable/ic_bet_center_game_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/btn_bet_minus"
+            style="@style/Text"
+            android:layout_marginStart="36dp"
+            android:paddingHorizontal="14dp"
+            android:paddingTop="16dp"
+            android:text="@string/minus"
+            android:textSize="38sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bet"
+            app:layout_constraintStart_toStartOf="@id/iv_bet"
+            app:layout_constraintTop_toTopOf="@id/iv_bet" />
+
+        <TextView
+            android:id="@+id/btn_bet_plus"
+            style="@style/Text"
+            android:layout_marginEnd="38dp"
+            android:paddingHorizontal="14dp"
+            android:paddingTop="16dp"
+            android:text="@string/plus"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bet"
+            app:layout_constraintEnd_toEndOf="@id/iv_bet"
+            app:layout_constraintTop_toTopOf="@id/iv_bet" />
+
+        <TextView
+            android:id="@+id/tv_rate"
+            android:text="@string/rate"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="28sp"
+            android:layout_marginEnd="6dp"
+            android:paddingTop="16dp"
+            style="@style/Text"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bet_center"
+            app:layout_constraintEnd_toEndOf="@id/iv_bet_center"
+            app:layout_constraintStart_toStartOf="@id/iv_bet_center"
+            app:layout_constraintTop_toTopOf="@id/iv_bet_center" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
+        android:background="@drawable/ic_play_1"
+        android:paddingTop="16dp"
+        android:text="@string/play"
+        style="@style/Text"
+        android:textSize="34sp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_baraban"
+        app:layout_constraintTop_toBottomOf="@id/bet_layout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

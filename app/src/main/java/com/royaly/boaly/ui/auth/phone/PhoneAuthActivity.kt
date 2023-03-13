@@ -3,9 +3,6 @@ package com.royaly.boaly.ui.auth.phone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
 import com.royaly.boaly.R
 import com.royaly.boaly.data.Pref
 import com.royaly.boaly.databinding.ActivityPhoneAuthBinding
@@ -37,22 +34,9 @@ class PhoneAuthActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
-
         binding.btnSignUp.setOnClickListener {
             authPhone()
         }
-        binding.edAuth.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.ccp.visibility = View.INVISIBLE
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
     }
 
     private fun authPhone() {

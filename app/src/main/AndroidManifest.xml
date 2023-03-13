@@ -14,31 +14,43 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.auth.email.EmailAuthActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
         </activity>
         <activity
             android:name=".ui.auth.phone.PhoneAuthActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
         </activity>
         <activity
             android:name=".ui.settings.SettingsActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
         </activity>
         <activity
             android:name=".ui.game.bonus.BonusGameActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
         </activity>
         <activity
             android:name=".ui.game.two.GameTwoActivity"
@@ -49,10 +61,13 @@
         </activity>
         <activity
             android:name=".ui.menu.MenuActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
         </activity>
         <activity
             android:name=".ui.game.one.GameOneActivity"
@@ -68,7 +83,9 @@
             android:name=".LoadActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

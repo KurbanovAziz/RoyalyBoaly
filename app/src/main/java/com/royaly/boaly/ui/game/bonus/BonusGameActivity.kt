@@ -1,15 +1,21 @@
 package com.royaly.boaly.ui.game.bonus
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.royaly.boaly.R
+import com.royaly.boaly.data.Pref
 import com.royaly.boaly.databinding.ActivityBonusGameBinding
+import com.royaly.boaly.ui.menu.MenuActivity
 import com.royaly.boaly.utils.showToast
 import kotlin.random.Random
 
 class BonusGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBonusGameBinding
+
+    private lateinit var pref : Pref
 
     private val scoreIcons = listOf(
         R.drawable.ic_score_0, R.drawable.ic_score_150, R.drawable.ic_score_200
@@ -27,19 +33,29 @@ class BonusGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBonusGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        pref = Pref(this)
         initListener()
         gameGrid()
+        onBack()
+        score = pref.getScore()
+    }
 
+
+    private fun onBack() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                pref.saveScore(score)
+                finish()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun initListener() {
-        binding.tvScore.text = score.toString()
+        binding.tvScore.text = pref.getScore().toString()
 
         binding.btnBack.setOnClickListener {
-            setResult(
-                RESULT_OK
-            )
+            pref.saveScore(score)
             finish()
         }
     }
